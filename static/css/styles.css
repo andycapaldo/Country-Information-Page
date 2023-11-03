@@ -7,4 +7,8 @@ button {
     background-color: #66FCF1;
 }
 
-
+#country-flag-container > img {
+    max-width: 400px;
+    max-height: 400px;
+    margin-bottom: 50px;
+}

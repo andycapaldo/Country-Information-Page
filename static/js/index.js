@@ -26,11 +26,6 @@ function findCountries(e){
         .then(data => displayCountries(data))
         .catch(err => console.error(err))
 
-    fetch(url)
-        .then(res => res.json)
-        .then(data => addFlag(data))
-        .catch(err => console.error(err))
-
     e.target.country.value = '';
 }
 
@@ -61,6 +56,7 @@ function displayCountries(data){
         let tr = document.createElement('tr');
         tbody.append(tr);
 
+        addFlag(country.flags.png, country.coatOfArms.png)
         newDataCell(tr, country.name.common)
         newDataCell(tr, Object.keys(country.currencies))
         newDataCell(tr, country.capital)
@@ -77,9 +73,13 @@ function newDataCell(tr, value){
 }
 
 // Function to add country flag to img element
-function addFlag(data){
+function addFlag(flagURL, coatOfArmsURL){
     let countryFlag = document.getElementById('country-flag-container');
+    countryFlag.innerHTML = '';
     const flagImg = document.createElement('img');
+    const coatOfArmsImg = document.createElement('img');
     countryFlag.append(flagImg);
-    flagImg.src = data.flags['png'];
+    countryFlag.append(coatOfArmsImg);
+    flagImg.src = flagURL;
+    coatOfArmsImg.src = coatOfArmsURL;
 }
