@@ -26,6 +26,10 @@ function findCountries(e){
         .then(data => displayCountries(data))
         .catch(err => console.error(err))
 
+    fetch(url)
+        .then(res => res.json)
+        .then(data => addFlag(data))
+        .catch(err => console.error(err))
 
     e.target.country.value = '';
 }
@@ -70,4 +74,12 @@ function newDataCell(tr, value){
     let td = document.createElement('td');
     td.innerHTML = value ?? '-';
     tr.append(td)
+}
+
+// Function to add country flag to img element
+function addFlag(data){
+    let countryFlag = document.getElementById('country-flag-container');
+    const flagImg = document.createElement('img');
+    countryFlag.append(flagImg);
+    flagImg.src = data.flags['png'];
 }
